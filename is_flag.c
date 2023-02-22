@@ -1,5 +1,5 @@
 #include "include/ft_printf.h"
-#include "include/libft.h"
+#include "libft/libft.h"
 
 int is_flag(int c)
 {

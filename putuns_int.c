@@ -1,5 +1,5 @@
 #include "include/ft_printf.h"
-#include "include/libft.h"
+#include "libft/libft.h"
 
 void    putuns(unsigned int un)
 {
@@ -18,7 +18,9 @@ size_t  putuns_int(unsigned int un)
 
     putuns(un);
     ln = 0;
-    while (ln > 0)
+    if (un == 0)
+        return (1);
+    while (un > 0)
     {
         ln++;
         un /= 10;

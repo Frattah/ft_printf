@@ -1,5 +1,5 @@
 #include "include/ft_printf.h"
-#include "include/libft.h"
+#include "libft/libft.h"
 
 size_t  convert(const char **f, s_print *ist)
 {
@@ -23,7 +23,7 @@ size_t  convert(const char **f, s_print *ist)
     if (**f == 'p')
         ln = putptr_int(va_arg(ist->args, unsigned long long));
     if (**f == 'x' || **f == 'X')
-        ln = puthex_int(va_arg(ist->args, unsigned long long));
+        ln = puthex_int(va_arg(ist->args, unsigned long long), **f);
     if (**f == 'u')
         ln = putuns_int(va_arg(ist->args, unsigned long long));
     return (ln);

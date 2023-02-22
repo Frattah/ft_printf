@@ -1,5 +1,5 @@
 #include "include/ft_printf.h"
-#include "include/libft.h"
+#include "libft/libft.h"
 
 size_t  cnt_ptr_dgt(unsigned long long ptr)
 {

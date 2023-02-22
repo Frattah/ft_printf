@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "include/ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	sum(int count, ...)
 {
@@ -25,6 +26,6 @@ int	sum(int count, ...)
 
 int	main(void)
 {
-	int x = ft_printf("Test% +d fichissimo!\n", 432);
-	printf("%+d\n", 432);
+	printf("%d\n",ft_printf(" %+d\n", 9));
+	printf("%d\n",printf(" %012d\n", 9));
 }

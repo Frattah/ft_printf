@@ -1,23 +1,30 @@
 #include "include/ft_printf.h"
-#include "include/libft.h"
+#include "libft/libft.h"
 
-void    puthex(unsigned long long hx)
+void    puthex(unsigned int hx, int c)
 {
     if (hx >= 16)
     {
-        puthex(hx / 16);
-        puthex(hx % 16);
+        puthex(hx / 16, c);
+        puthex(hx % 16, c);
     }
     else
-        putchr_int("0123456789abcdef"[hx]);
+    {
+        if (c == 'x')
+            putchr_int("0123456789abcdef"[hx]);
+        else
+            putchr_int("0123456789ABCDEF"[hx]);
+    }
 }
 
-size_t  puthex_int(unsigned long long hx)
+size_t  puthex_int(unsigned int hx, int c)
 {
     size_t ln;
 
     ln = 0;
-    puthex(hx);
+    puthex(hx, c);
+    if (hx == 0)
+        return (1);
     while(hx > 0)
     {
         ln++;

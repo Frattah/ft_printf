@@ -39,7 +39,7 @@ size_t  putchr_int(int c);
 
 size_t  putptr_int(unsigned long long ptr);
 
-size_t  puthex_int(unsigned long long hx);
+size_t  puthex_int(unsigned int hx, int c);
 
 size_t  putuns_int(unsigned int un);
 
