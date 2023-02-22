@@ -11,18 +11,17 @@ void    puthex(unsigned int hx, int c)
     else
     {
         if (c == 'x')
-            putchr_int("0123456789abcdef"[hx]);
+            ft_putchr_fd("0123456789abcdef"[hx], 1);
         else
-            putchr_int("0123456789ABCDEF"[hx]);
+            ft_putchr_fd("0123456789ABCDEF"[hx], 1);
     }
 }
 
-size_t  puthex_int(unsigned int hx, int c)
+int     cnt_digit_x(unsigned int hx)
 {
-    size_t ln;
+    int ln;
 
     ln = 0;
-    puthex(hx, c);
     if (hx == 0)
         return (1);
     while(hx > 0)
@@ -31,4 +30,19 @@ size_t  puthex_int(unsigned int hx, int c)
         hx /= 16;
     }
     return (ln);
+}
+
+int     puthex_int(unsigned int hx, int c, s_print *ist)
+{
+    if (ist->zero)
+    {
+        if (ist->zero > cnt_digit_x(hx))
+            ist->zero -= cnt_digit_x(hx);
+        else
+            ist->zero = 0;
+        for (int i = 0; i < ist->zero; i++)
+            write(1, "0", 1);
+    } 
+    puthex(hx, c);
+    return (ist->zero + cnt_digit_x(hx));
 }

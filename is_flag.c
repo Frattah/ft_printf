@@ -3,5 +3,5 @@
 
 int is_flag(int c)
 {
-    return (c == '#' || c == '+' || c == ' ' || ft_isdigit(c));
+    return (c == '-' || c == '#' || c == '+' || c == ' ' || ft_isdigit(c));
 }

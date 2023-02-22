@@ -26,6 +26,6 @@ int	sum(int count, ...)
 
 int	main(void)
 {
-	printf("%d\n",ft_printf(" %+d\n", 9));
-	printf("%d\n",printf(" %012d\n", 9));
+	printf(" %d\n",ft_printf("|%10c|", 'u'));
+	printf(" %d\n",printf("|%10c|", 'u'));
 }

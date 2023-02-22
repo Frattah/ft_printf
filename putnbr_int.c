@@ -1,9 +1,9 @@
 #include "include/ft_printf.h"
 #include "libft/libft.h"
 
-size_t  cnt_digit(int n)
+int  cnt_digit_d(int n)
 {
-    size_t dgt;
+    int dgt;
 
     if (n == 0)
         return (1);
@@ -23,12 +23,41 @@ size_t  cnt_digit(int n)
     return (dgt);
 }
 
+void	putnbr(int n)
+{
+	if (n == -2147483648)
+	{
+		ft_putstr_fd("2147483648", 1);
+		return ;
+	}
+	else if (n < 0)
+		n *= -1;
+	if (n < 10)
+		ft_putchr_fd("0123456789"[n], 1);
+	else
+	{
+		putnbr(n / 10);
+		putnbr(n % 10);
+	}
+}
+
 size_t	putnbr_int(int n, s_print *ist)
 {
     if (ist->sign && n >= 0 && ist->zero == 0)
         write(1, "+", 1);
+    if (n < 0)
+        ft_putstr_fd("-", 1);
+    if (ist->zero)
+    {
+        if (ist->zero > cnt_digit_d(n))
+            ist->zero -= cnt_digit_d(n);
+        else
+            ist->zero = 0;
+        for (int i = 0; i < ist->zero; i++)
+            write(1, "0", 1);
+    }        
     if (!ist->sign && ist->sp && n >= 0)
         write(1, " ", 1);
-    ft_putnbr_fd(n, 1);
-    return (ist->sign + cnt_digit(n));
+    putnbr(n);
+    return (ist->sign + cnt_digit_d(n) + ist->zero);
 }

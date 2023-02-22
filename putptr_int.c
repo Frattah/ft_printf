@@ -22,7 +22,7 @@ void    putptr(unsigned long long ptr)
         putptr(ptr % 16);
     }
     else
-        putchr_int("0123456789abcdef"[ptr]);
+        ft_putchr_fd("0123456789abcdef"[ptr], 1);
 }
 
 size_t  putptr_int(unsigned long long ptr)

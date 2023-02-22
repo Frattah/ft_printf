@@ -1,12 +1,16 @@
 #include "include/ft_printf.h"
 #include "libft/libft.h"
 
-void    mng_flag(int flg, s_print *ist)
+void    mng_flag(const char **f, s_print *ist)
 {
-    if (flg == '+')
+    if (**f == '+')
         ist->sign++;
-    if (flg == ' ')
+    if (**f == ' ')
         ist->sp++;
-    if (flg == '0')
-        ist->zero++;
+    if (**f == '0')
+        ist->zero = ft_atoi(*f);
+    if (**f == '-')
+        ist->dash = ft_atoi(*f + 1);
+    if (ft_isdigit(**f) && **f != 0)
+        ist->zero = ft_atoi(*f);
 }

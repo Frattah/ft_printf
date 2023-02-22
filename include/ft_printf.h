@@ -11,19 +11,19 @@ typedef struct S_PRINT
     va_list args;
     int     wdt;
     int     prc;
-    int     zero;
+    int     zero;       //
     int     pnt;
-    int     dash;
+    int     dash;       
     size_t  ln;
-    int     sign;
+    int     sign;       //
     int     is_zero;
     int     perc;
-    int     sp;
+    int     sp;         //
 }   s_print;
 
 int     ft_printf(const char *format, ...);
 
-size_t  cnt_digit(int n);
+int     cnt_digit_d(int n);
 
 void    cnt_return(const char *format, s_print *ist);
 
@@ -33,17 +33,17 @@ size_t  convert(const char **f, s_print *ist);
 
 size_t  putnbr_int(int nb, s_print *ist);
 
-size_t  putstr_int(char *s);
+size_t  putstr_int(char *s, s_print *ist);
 
-size_t  putchr_int(int c);
+size_t  putchr_int(int c, s_print *ist);
 
 size_t  putptr_int(unsigned long long ptr);
 
-size_t  puthex_int(unsigned int hx, int c);
+int     puthex_int(unsigned int hx, int c, s_print *ist);
 
-size_t  putuns_int(unsigned int un);
+int     putuns_int(unsigned int un, s_print *ist);
 
-void    mng_flag(int flg, s_print *ist);
+void    mng_flag(const char **f, s_print *ist);
 
 int     is_flag(int c);
 

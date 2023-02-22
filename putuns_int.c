@@ -4,7 +4,7 @@
 void    putuns(unsigned int un)
 {
 	if (un < 10)
-		putchr_int("0123456789"[un]);
+		ft_putchr_fd("0123456789"[un], 1);
 	else
 	{
 		putuns(un / 10);
@@ -12,11 +12,10 @@ void    putuns(unsigned int un)
 	}
 }
 
-size_t  putuns_int(unsigned int un)
+int     cnt_digit_u(unsigned int un)
 {
-    size_t ln;
+    int ln;
 
-    putuns(un);
     ln = 0;
     if (un == 0)
         return (1);
@@ -26,4 +25,19 @@ size_t  putuns_int(unsigned int un)
         un /= 10;
     }
     return (ln);
+}
+
+int  putuns_int(unsigned int un, s_print *ist)
+{
+    if (ist->zero)
+    {
+        if (ist->zero > cnt_digit_u(un))
+            ist->zero -= cnt_digit_u(un);
+        else
+            ist->zero = 0;
+        for (int i = 0; i < ist->zero; i++)
+            write(1, "0", 1);
+    } 
+    putuns(un);
+    return (ist->zero + cnt_digit_u(un));
 }
