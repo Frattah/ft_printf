@@ -1,4 +1,4 @@
-SRCS	=	ft_printf.c cnt_return.c convert.c	init_s_print.c	putnbr_int.c	putstr_int.c	putchr_int.c \
+SRCS	=	ft_printf.c cnt_return.c convert.c	init_t_print.c	putnbr_int.c	putstr_int.c	putchr_int.c \
 			putptr_int.c	puthex_int.c	putuns_int.c	mng_flag.c	is_flag.c
 OBJS	=	$(SRCS:.c=.o)
 

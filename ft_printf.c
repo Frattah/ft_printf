@@ -1,17 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/23 14:55:04 by frmonfre          #+#    #+#             */
+/*   Updated: 2023/02/23 15:32:01 by frmonfre         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/ft_printf.h"
 #include "libft/libft.h"
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-    int ln;
-    s_print *ist = (s_print *)malloc(sizeof(s_print));
-    va_start(ist->args, format);
-    if (!ist)
-        return (-1);
-    init_s_print(ist);
-    cnt_return(format, ist);
-    va_end(ist->args);
-    ln = ist->ln;
-    free(ist);
-    return(ln);
+	int		ln;
+	t_print	*ist;
+
+	ist = (t_print *)malloc(sizeof(t_print));
+	va_start(ist->args, format);
+	if (!ist)
+		return (-1);
+	init_t_print(ist);
+	cnt_return(format, ist);
+	va_end(ist->args);
+	ln = ist->ln;
+	free(ist);
+	return (ln);
 }

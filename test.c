@@ -26,6 +26,16 @@ int	sum(int count, ...)
 
 int	main(void)
 {
-	printf(" %d\n",ft_printf("|%10c|", 'u'));
-	printf(" %d\n",printf("|%10c|", 'u'));
+	printf("%d\n",ft_printf(" %011x ", LONG_MAX));
+	printf("%d\n",printf(" %011x ", LONG_MAX));
+
+	printf("%d\n",ft_printf(" %01X ", 0));
+	printf("%d\n",printf(" %01X ", 0));
+
+	printf("%d\n",ft_printf(" %011X ", LONG_MAX));
+	printf("%d\n",printf(" %011X ", LONG_MAX));
+
+	printf("%d\n",ft_printf(" %011x ", LONG_MAX));
+	printf("%d\n",printf(" %011x ", LONG_MAX));
+	
 }

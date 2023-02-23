@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cnt_return.c                                       :+:      :+:    :+:   */
+/*   init_s_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 14:47:48 by frmonfre          #+#    #+#             */
-/*   Updated: 2023/02/23 15:31:05 by frmonfre         ###   ########.fr       */
+/*   Created: 2023/02/23 14:54:05 by frmonfre          #+#    #+#             */
+/*   Updated: 2023/02/23 15:28:53 by frmonfre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_printf.h"
 #include "libft/libft.h"
 
-void	cnt_return(const char *format, t_print *ist)
+void	init_t_print(t_print *nw)
 {
-	while (*format)
-	{
-		if (*format == '%')
-			ist->ln += convert(&format, ist);
-		else
-			ist->ln += write(1, format, 1);
-		format++;
-	}
+	nw->prc = 0;
+	nw->zero = 0;
+	nw->pnt = 0;
+	nw->dash = 0;
+	nw->ln = 0;
+	nw->sign = 0;
+	nw->perc = 0;
+	nw->sp = 0;
 }

@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   putnbr_int.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/23 15:14:40 by frmonfre          #+#    #+#             */
+/*   Updated: 2023/02/23 15:48:57 by frmonfre         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/ft_printf.h"
 #include "libft/libft.h"
 
-int  cnt_digit_d(int n)
+int	cnt_digit_d(int n)
 {
-    int dgt;
+	int dgt;
 
-    if (n == 0)
-        return (1);
-    dgt = 0;
-    if (n < 0)
-    {
-        dgt++;
-        if (n == -2147483648)
-            return (11);
-        n *= -1;
-    }
-    while (n > 0)
-    {
-        dgt++;
-        n /= 10;
-    }
-    return (dgt);
+	if (n == 0)
+		return (1);
+	dgt = 0;
+	if (n < 0)
+	{
+		dgt++;
+		if (n == -2147483648)
+			return (11);
+		n *= -1;
+	}
+	while (n > 0)
+	{
+		dgt++;
+		n /= 10;
+	}
+	return (dgt);
 }
 
 void	putnbr(int n)
@@ -41,23 +53,43 @@ void	putnbr(int n)
 	}
 }
 
-size_t	putnbr_int(int n, s_print *ist)
+void	zero(int n, t_print *ist)
 {
-    if (ist->sign && n >= 0 && ist->zero == 0)
-        write(1, "+", 1);
-    if (n < 0)
-        ft_putstr_fd("-", 1);
-    if (ist->zero)
-    {
-        if (ist->zero > cnt_digit_d(n))
-            ist->zero -= cnt_digit_d(n);
-        else
-            ist->zero = 0;
-        for (int i = 0; i < ist->zero; i++)
-            write(1, "0", 1);
-    }        
-    if (!ist->sign && ist->sp && n >= 0)
-        write(1, " ", 1);
-    putnbr(n);
-    return (ist->sign + cnt_digit_d(n) + ist->zero);
+	int	i;
+
+	i = -1;
+	while (++i < ist->prc - cnt_digit(n) + (n < 0))
+		write(1, "0", 1);
+	if (!ist->sign && ist->sp && n >= 0)
+		write(1, " ", 1);
+}
+
+size_t	putnbr_int(int n, t_print *ist)
+{
+	if (ist->sign && n >= 0 && ist->zero == 0)
+		write(1, "+", 1);
+	if (n < 0)
+		ft_putstr_fd("-", 1);
+	if (ist->dash)
+	{
+		putnbr(n);
+		for (int i = 0; i < ist->dash - cnt_digit_d(n); i++)
+			write(1, " ", 1);
+		if (ist->dash > cnt_digit_d(n))
+			return (ist->dash);
+		return (cnt_digit_d(n));
+	}
+	if (ist->zero)
+	{
+		if (ist->zero > cnt_digit_d(n))
+			ist->zero -= cnt_digit_d(n);
+		else
+			ist->zero = 0;
+		for (int i = 0; i < ist->zero; i++)
+			write(1, "0", 1);
+	}
+	putnbr(n);
+	if (ist->prc > cnt_digit_d(n) - (n < 0))
+		return (ist->sign + ist->prc + ist->zero + (n < 0));
+	return ((ist->sign && n >= 0) + cnt_digit_d(n) + ist->zero + (ist->sp && n >= 0));
 }
