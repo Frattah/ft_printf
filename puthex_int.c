@@ -6,7 +6,7 @@
 /*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:37:51 by frmonfre          #+#    #+#             */
-/*   Updated: 2023/02/23 15:40:46 by frmonfre         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:49:54 by frmonfre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,26 @@ int	cnt_digit_x(unsigned int hx)
 	return (ln);
 }
 
+void	zero_x(unsigned int hx, t_print *ist)
+{
+	int	i;
+
+	i = -1;
+	if (!ist->zero)
+		return ;
+	if (ist->zero > cnt_digit_x(hx))
+		ist->zero -= cnt_digit_x(hx);
+	else
+		ist->zero = 0;
+	while (++i < ist->zero)
+		write(1, "0", 1);
+}
+
 int	puthex_int(unsigned int hx, int c, t_print *ist)
 {
+	int	i;
+
+	i = -1;
 	if (ist->pnt && hx && c == 'x')
 		write(1, "0x", 2);
 	if (ist->pnt && hx && c == 'X')
@@ -53,26 +71,18 @@ int	puthex_int(unsigned int hx, int c, t_print *ist)
 	if (ist->dash)
 	{
 		puthex(hx, c);
-		for (int i = 0; i < ist->dash - cnt_digit_x(hx); i++)
+		while (++i < ist->dash - cnt_digit_x(hx))
 			write(1, " ", 1);
 		if (ist->dash > cnt_digit_x(hx))
 			return (ist->dash);
 		return (cnt_digit_x(hx));
 	}
-	if (ist->zero)
-	{
-		if (ist->zero > cnt_digit_x(hx))
-			ist->zero -= cnt_digit_x(hx);
-		else
-			ist->zero = 0;
-		for (int i = 0; i < ist->zero; i++)
-			
-			write(1, "0", 1);
-	}
-	for (int i = 0; i < ist->prc - cnt_digit_x(hx); i++)
+	i = -1;
+	while (++i < ist->prc - cnt_digit_x(hx))
 		write(1, "0", 1);
+	zero_x(hx, ist);
 	puthex(hx, c);
 	if (ist->prc > cnt_digit_x(hx))
-		return (ist->sign + ist->prc + ist->zero +2*(ist->pnt && hx));
-	return (ist->zero + cnt_digit_x(hx) + 2*(ist->pnt && hx));
+		return (ist->sign + ist->prc + ist->zero + 2 * (ist->pnt && hx));
+	return (ist->zero + cnt_digit_x(hx) + 2 * (ist->pnt && hx));
 }

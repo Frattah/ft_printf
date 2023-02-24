@@ -21,9 +21,9 @@ void	mng_flag(const char **f, t_print *ist)
 		ist->sign++;
 	if (**f == ' ')
 		ist->sp++;
-	if (**f == '0' && !ist->dash)
+	if (**f == '0' && !ist->dash && !ist->zero)
 		ist->zero = ft_atoi(*f);
-	if (**f == '.')
+	if (**f == '.' && !ist->prc)
 	{
 		ist->prc = ft_atoi(*f + 1);
 		if (!ist->prc)
@@ -34,6 +34,6 @@ void	mng_flag(const char **f, t_print *ist)
 	if (**f == '-')
 		ist->dash = ft_atoi(*f + 1);
 	tmp_cnd = (!ist->dash && !ist->prc && !ft_isdigit(*(*f - 1)));
-	if (ft_isdigit(**f) && **f != '0' && tmp_cnd)
+	if (ft_isdigit(**f) && !ist->zero && tmp_cnd)
 		ist->zero = ft_atoi(*f);
 }

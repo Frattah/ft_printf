@@ -19,7 +19,6 @@ void	init_t_print(t_print *nw)
 	nw->zero = 0;
 	nw->pnt = 0;
 	nw->dash = 0;
-	nw->ln = 0;
 	nw->sign = 0;
 	nw->perc = 0;
 	nw->sp = 0;

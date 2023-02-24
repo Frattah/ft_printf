@@ -23,6 +23,7 @@ int	ft_printf(const char *format, ...)
 	if (!ist)
 		return (-1);
 	init_t_print(ist);
+	ist->ln = 0;
 	cnt_return(format, ist);
 	va_end(ist->args);
 	ln = ist->ln;

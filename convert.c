@@ -38,5 +38,6 @@ size_t	convert(const char **f, t_print *ist)
 		ln = puthex_int(va_arg(ist->args, unsigned long long), **f, ist);
 	if (**f == 'u')
 		ln = putuns_int(va_arg(ist->args, unsigned long long), ist);
+	init_t_print(ist);
 	return (ln);
 }

@@ -39,27 +39,38 @@ int	cnt_digit_u(unsigned int un)
 	return (ln);
 }
 
+void	zero_un(unsigned int un, t_print *ist)
+{
+	int	i;
+
+	i = -1;
+	if (!ist->zero)
+		return ;
+	if (ist->zero > cnt_digit_u(un))
+		ist->zero -= cnt_digit_u(un);
+	else
+		ist->zero = 0;
+	while (++i < ist->zero)
+		write(1, "0", 1);
+}
+
 int	putuns_int(unsigned int un, t_print *ist)
 {
+	int	i;
+
+	i = -1;
 	if (ist->dash)
 	{
 		putuns(un);
-		for (int i = 0; i < ist->dash - cnt_digit_u(un); i++)
+		while (++i < ist->dash - cnt_digit_u(un))
 			write(1, " ", 1);
 		if (ist->dash > cnt_digit_u(un))
 			return (ist->dash);
 		return (cnt_digit_u(un));
 	}
-	if (ist->zero)
-	{
-		if (ist->zero > cnt_digit_u(un))
-			ist->zero -= cnt_digit_u(un);
-		else
-			ist->zero = 0;
-		for (int i = 0; i < ist->zero; i++)
-			write(1, "0", 1);
-	}
-	for (int i = 0; i < ist->prc - cnt_digit_u(un); i++)
+	zero_un(un, ist);
+	i = -1;
+	while (++i < ist->prc - cnt_digit_u(un))
 		write(1, "0", 1);
 	putuns(un);
 	if (ist->prc > cnt_digit_u(un))
